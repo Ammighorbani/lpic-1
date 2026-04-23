@@ -1,0 +1,1 @@
+### You can install linux / unix base packages from [pkgs.org](pkgs.org) and install them with package manager look like dpkg for debian bases

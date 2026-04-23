@@ -1,0 +1,1 @@
+### You can install linux / unix base packages from [rpmfind.net](rpmfind.net) or [freshrpms.net](freshrpms.net) and install them with package manager look like dpkg for debian bases

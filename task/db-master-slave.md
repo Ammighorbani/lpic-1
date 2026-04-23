@@ -1,0 +1,1 @@
+### Create master and slave database, You have a database on server-1 and you write some data but automaticlly that data must write on server-2 and always be think

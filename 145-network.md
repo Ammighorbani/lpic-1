@@ -586,6 +586,11 @@ netstat -an
 netstat -ap
 ```
 
+**You can see your routing table**
+```bash
+netstat -rn
+```
+
 ---
 
 ### You can see can you connect to a specefic port or no

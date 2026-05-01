@@ -148,6 +148,8 @@ elasticsearch.username: "kibana_system"
 elasticsearch.password: "PASS"
 ```
 
+### Note: When you using kibana you must to create a new user for kibana with `kibana_system` username and copy that user on elasticsearch password and replace it with `PASS`
+
 ---
 
 ### `12`- Restart kibana service
@@ -178,4 +180,108 @@ apt install logstash -y
 
 ---
 
-### `15`- 
+### `15`- You need to create a pipeline to receive logs from rsyslog
+**You can have access to elasticsearch yaml file to receive logs in `/etc/logstash/conf.d/rsyslog.conf` route and put the config below in it**
+
+```bash
+input {
+  tcp {
+    port => 5000
+    codec => json
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "rsyslog-%{+YYYY.MM.dd}"
+    user => "elastic"
+    password => "n-_+YPennEyouIHmqDsx"
+  }
+}
+```
+
+### Note: If you have ssl on your server change your `url` to `https`
+
+---
+
+### `16`- Enable and start logstash service
+
+```bash
+systemctl enable logstash && systemctl start logstash
+```
+
+---
+
+### `17`- Configure rsyslog to send logs
+**You can do it in rsyslog `server` and `client` either cause you can only send logs to logstash but it's recommended you do it on your rsyslog server, you can access to configuration file in `/etc/rsyslog.d/60-logstash.conf` route and add below configuration**
+
+**TCP**
+```bash
+*.* @@SERVER-IP:5000
+```
+
+**UDP**
+```bash
+*.* @SERVER-IP:5000
+```
+
+---
+
+### `18`- Restart rsyslog service
+```bash
+systemctl restart rsyslog
+```
+
+### Note: You need to restart again rsyslog service after any changes on configuration file
+
+---
+
+### `19`- Open firewall ports
+**If you have any `firewall` on your servers you need to open ports**
+
+```bash
+ufw allow 9200/tcp
+
+ufw allow 5601/tcp
+
+ufw allow 5000/tcp
+
+ufw enable
+```
+
+---
+
+### `20`- better to restart whole services
+```bash
+systemctl restart elasticsearch && systemctl restart kibana && systemctl restart logstash
+```
+
+---
+
+### `21`- Create an index pattern in kibana
+**Open your kibana with your browser**
+```bash
+http://[your-IP]:5601
+```
+
+**Open `management` in `stack management` and click on `index pattern` and create an index pattern with below pattern**
+
+```bash
+rsyslog-*
+```
+
+**Timestamp**
+```bash
+@timestamp
+```
+
+---
+
+### `22`- How to see logs?
+**You can see logs in `Discover` section**
+
+---
+
+### `23`- Where logstash will store logs?
+**You can find logstash stored logs in `/var/log/logstash` route**

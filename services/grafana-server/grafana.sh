@@ -54,14 +54,14 @@ if [ "$GRAFANA_MODEL" = "2" ]; then
         sudo chmod +x /usr/local/bin/loki
 
         # Create loki configuration
-        # sudo cat $RUN_DIR/loki-config.yml > /etc/loki/config.yml
+        sudo cat $RUN_DIR/loki-config.yml > /etc/loki/config.yml
 
         # Create loki directories
         sudo mkdir -p /var/lib/loki/{chunks,index,index_cache,compactor,wal}
         sudo chown -R loki:loki /var/lib/loki
 
         # Create systemd for loki
-        # sudo cat $RUN_DIR/loki-systemd > /etc/systemd/system/loki.service
+        sudo cat $RUN_DIR/loki-systemd > /etc/systemd/system/loki.service
 
         # Activate loki service
         sudo systemctl daemon-reload 
@@ -110,11 +110,11 @@ if [ "$GRAFANA_MODEL" = "2" ]; then
           sudo chown promtail:promtail /var/lib/promtail
 
           # Create promtail configuration
-        #   sudo cat $RUN_DIR/promtail-config.yml > /etc/promtail/config.yml
+          sudo cat $RUN_DIR/promtail-config.yml > /etc/promtail/config.yml
           sudo sed -i 's/<loki-server-ip>/$LOKI_IP/g' /etc/promtail/config.yml
 
           # Create systemd for promtail
-        #   sudo cat $RUN_DIR/promtail-systemd > /etc/systemd/system/promtail.service
+          sudo cat $RUN_DIR/promtail-systemd > /etc/systemd/system/promtail.service
 
           # Change rsyslog directory permissions
           sudo chgrp -R syslog /var/log/remote
@@ -161,14 +161,14 @@ elif [ "$GRAFANA_MODEL" = "1" ]; then
       sudo chmod +x /usr/local/bin/loki
 
       # Create loki configuration
-    #   sudo cat $RUN_DIR/loki-config.yml > /etc/loki/config.yml
+      sudo cat $RUN_DIR/loki-config.yml > /etc/loki/config.yml
 
       # Create loki directories
       sudo mkdir -p /var/lib/loki/{chunks,index,index_cache,compactor,wal}
       sudo chown -R loki:loki /var/lib/loki
 
       # Create systemd for loki
-    #   sudo cat $RUN_DIR/loki-systemd > /etc/systemd/system/loki.service
+      sudo cat $RUN_DIR/loki-systemd > /etc/systemd/system/loki.service
 
       # Activate loki service
       sudo systemctl daemon-reload 
@@ -215,11 +215,11 @@ elif [ "$GRAFANA_MODEL" = "1" ]; then
       sudo chown promtail:promtail /var/lib/promtail
 
       # Create promtail configuration
-    #   sudo cat $RUN_DIR/promtail-config.yml > /etc/promtail/config.yml
+      sudo cat $RUN_DIR/promtail-config.yml > /etc/promtail/config.yml
       sudo sed -i 's/<loki-server-ip>/$LOKI_IP/g' /etc/promtail/config.yml
 
       # Create systemd for promtail
-    #   sudo cat $RUN_DIR/promtail-systemd > /etc/systemd/system/promtail.service
+      sudo cat $RUN_DIR/promtail-systemd > /etc/systemd/system/promtail.service
 
       # Change rsyslog directory permissions
       sudo chgrp -R syslog /var/log/remote

@@ -399,5 +399,5 @@ systemctl restart loki && systemctl restart grafana-server
 
 ---
 
-### `32`- Create dashboard to search logs better
-**On left side menu click on `Dashboards` and then `Create dashboard` and make your own custom dashboard**
+### `32`- Create dashboard for logs
+**On left side menu  you can create dashboard to filter your logs, click on `Dashboards` and then `Create dashboard` and make your own custom dashboard**

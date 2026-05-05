@@ -1,0 +1,51 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  log_level: info
+
+ingester:
+  wal:
+    enabled: true
+    dir: /var/lib/loki/wal
+  lifecycler:
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+    final_sleep: 0s
+  chunk_idle_period: 5m
+  max_chunk_age: 1h
+
+schema_config:
+  configs:
+    - from: 2024-01-01
+      store: boltdb-shipper
+      object_store: filesystem
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+storage_config:
+  filesystem:
+    directory: /var/lib/loki/chunks
+
+  boltdb_shipper:
+    shared_store: filesystem
+    active_index_directory: /var/lib/loki/index
+    cache_location: /var/lib/loki/index_cache
+    cache_ttl: 24h
+
+compactor:
+  working_directory: /var/lib/loki/compactor
+  shared_store: filesystem
+
+limits_config:
+  ingestion_rate_mb: 16
+  ingestion_burst_size_mb: 32
+  max_cache_freshness_per_query: 10m
+
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 168h  # keep logs 7 days

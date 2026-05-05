@@ -1,0 +1,25 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yml
+
+clients:
+  - url: http://<loki-server-ip>:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: rsyslog-remote-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: rsyslog-remote
+          __path__: /var/log/remote/*/*
+    pipeline_stages:
+      - regex:
+          expression: '(?P<hostname>[^/]+)/(?P<service>[^/]+)$'
+          source: filename
+      - labels:
+          hostname:
+          service:

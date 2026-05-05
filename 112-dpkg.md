@@ -28,3 +28,51 @@ dpkg -i zip_3.0-12build2_amd64.deb
 ```
 
 ### Note: It's possible that package you are trying to install have some dependency to install and you don't have that dependency on your system and you need to first install dependencys and after that again try to install first package you where tried to install
+
+---
+
+### You can see installed file location
+```bash
+dpkg -L [package-name]
+
+dpkg -L jcal
+```
+
+---
+
+### You can see creator of files
+**When you have a file and you don't know who created you can find it**
+```bash
+dpkg -S [route]
+
+dpkg -S /usr/share/man/man1/jcal.1.gz
+```
+
+---
+
+### You can see status of your packages
+```bash
+dpkg -s jcal
+```
+
+---
+
+### You can see content of your debian file
+```bash
+dpkg -c jcal_0.4.1-2build1_amd64.deb
+```
+
+---
+
+### You can remove your installed packages
+```bash
+dpkg -r jcal
+```
+
+---
+
+### You can purge your installed packages
+**Purge mean you remove that installed package and configuration files and dependencies either**
+```bash
+dpkg -P jcal
+```

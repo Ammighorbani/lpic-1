@@ -60,3 +60,8 @@ cat /etc/timezone
 ```bash
 hwclock
 ```
+
+---
+
+### If you have more that one server you need to configure and think their time
+**When you have more than one server you must to configure and think their time to work with each other without any problem and issues, you can do it with `NTP server` and [read more]() about `NTP server`**

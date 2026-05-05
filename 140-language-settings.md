@@ -47,7 +47,7 @@ iconv -l
 ### You can convert your files encoding from one of encoding to another
 
 ```bash
-iconv -f ASCII -t UTF-8
+iconv -f ASCII -t UTF-8 /root/file1 > newfile1
 ```
 
 #### `-f`: **From which encoding**

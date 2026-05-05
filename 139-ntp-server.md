@@ -17,4 +17,5 @@
 
 ---
 
-### 
+### You can start NTP server
+**You can start `NTP server`for free and you can check my step by step guideline [here](/services/NTP-server/ntp-server.md) or use my `NTP server` automation [here](/services/NTP-server/ntp.sh)**

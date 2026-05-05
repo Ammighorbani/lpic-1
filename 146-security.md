@@ -110,7 +110,12 @@ ss -au
 ss -alu
 ```
 
-**You can see program name on your port**
+**You can see program name on your ports**
 ```bash
 ss -altp
+```
+
+**You can see your ports with number of port**
+```bash
+ss -tulpn
 ```
